@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Configuração do Cabeçalho */
+.site-header {
+    background-color: #1e293b; /* Azul escuro profissional */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+}
+
+/* Container para alinhar o conteúdo do cabeçalho */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilização do Título/Logo */
+.site-logo h1 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.site-logo h1 span {
+    color: #38bdf8; /* Destaque azul claro na palavra IFA */
+}
+
+/* Menu de Navegação */
+.nav-menu {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os botões */
+}
+
+/* Estilo Geral dos Botões de Encaminhamento */
+.nav-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: #334155; /* Cor padrão do botão */
+    color: #f8fafc;
+    border: 1px solid transparent;
+}
+
+/* Efeito Hover (passar o mouse) personalizado para cada matéria */
+.btn-programacao:hover {
+    background-color: #2563eb; /* Azul */
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.btn-robotica:hover {
+    background-color: #16a34a; /* Verde */
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.btn-fisica:hover {
+    background-color: #db2777; /* Rosa/Fúcsia */
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Responsividade: Ajuste para telas menores (Celulares) */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: 100%;
+    }
+}
