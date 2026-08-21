@@ -1,506 +1,286 @@
-/* ==========================================================================
-   1. CONFIGURAÇÕES GERAIS & VARIÁVEIS CSS (DESIGN SYSTEM)
-   ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap');
-
-:root {
-  /* Paleta de Cores Cibernética & Bioluminescente */
-  --bg-dark: #05070d;
-  --bg-card: rgba(18, 22, 41, 0.65);
-  --bg-card-hover: rgba(28, 35, 64, 0.85);
-  
-  /* Cores de Destaque / Luz */
-  --primary: #00f2fe;
-  --primary-glow: rgba(0, 242, 254, 0.35);
-  --secondary: #4facfe;
-  --accent: #ff007f;
-  --accent-glow: rgba(255, 0, 127, 0.35);
-  --purple-glow: #7b2cbf;
-  
-  /* Textos */
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  
-  /* Tipografia */
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-body: 'Outfit', sans-serif;
-  
-  /* Transições e Bordas */
-  --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  --border-glow: 1px solid rgba(0, 242, 254, 0.15);
-  --radius-lg: 20px;
-  --radius-md: 12px;
-}
-
-/* Reset Global */
-*, *::before, *::after {
+/* RESET E VARIÁVEIS GLOBAIS */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --bg-dark: #090a0f;
+  --card-bg: #121526;
+  --primary: #00f2fe;
+  --secondary: #4facfe;
+  --accent: #ff007f;
+  --text-light: #f0f4f8;
+  --text-muted: #a0aec0;
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
 }
 
 body {
   background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: var(--font-body);
-  line-height: 1.7;
+  color: var(--text-light);
+  line-height: 1.6;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(123, 44, 191, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%);
-  background-attachment: fixed;
 }
 
-/* Seleção de Texto Estilizada */
-::selection {
-  background-color: var(--accent);
-  color: #fff;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 5px;
-  border: 2px solid var(--bg-dark);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* ==========================================================================
-   2. CABEÇALHO & NAVEGAÇÃO (GLASSMORPHISM)
-   ========================================================================== */
+/* NAV BAR */
 header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  padding: 1.2rem 8%;
+  background: rgba(9, 10, 15, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  padding: 1rem 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(5, 7, 13, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 1000;
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 nav ul {
   display: flex;
-  gap: 2.5rem;
   list-style: none;
+  gap: 2rem;
 }
 
 nav a {
-  color: var(--text-muted);
+  color: var(--text-light);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
-  transition: var(--transition-fast);
-  position: relative;
-  padding: 0.3rem 0;
-}
-
-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transition: var(--transition-fast);
-  border-radius: 2px;
+  transition: color 0.3s;
 }
 
 nav a:hover {
-  color: var(--text-main);
-  text-shadow: 0 0 8px var(--primary-glow);
+  color: var(--primary);
 }
 
-nav a:hover::after {
-  width: 100%;
-}
-
-/* ==========================================================================
-   3. HERO SECTION (IMPACTO VISUAL DE APRESENTAÇÃO)
-   ========================================================================== */
+/* SEÇÃO HERO */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8rem 2rem 4rem 2rem;
+  padding: 0 1rem;
+  background: radial-gradient(circle at center, #1a1f38 0%, var(--bg-dark) 70%);
   position: relative;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(255, 0, 127, 0.05) 50%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-  filter: blur(50px);
 }
 
 .hero h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(180deg, #ffffff 30%, var(--text-muted) 100%);
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  max-width: 900px;
+  text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
 }
 
 .hero p {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: 1.2rem;
+  max-width: 600px;
   color: var(--text-muted);
-  max-width: 650px;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
+  margin-bottom: 2rem;
 }
 
-/* Botão Estilizado com Efeito Neon */
 .btn-hero {
-  display: inline-block;
-  padding: 1rem 2.8rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #000;
-  background: linear-gradient(135deg, var(--primary), #00c6ff);
+  padding: 0.8rem 2rem;
+  border: none;
   border-radius: 50px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 0 25px var(--primary-glow);
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .btn-hero:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 0 40px rgba(0, 242, 254, 0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
 }
 
-/* ==========================================================================
-   4. SIMULAÇÃO ANATÔMICA DO OLHO (CSS ART + ANIMAÇÃO DE DILATAÇÃO)
-   ========================================================================== */
+/* SIMULAÇÃO VISUAL DA LUZ (CSS ART) */
 .eye-simulation {
-  margin-top: 3.5rem;
-  width: 140px;
-  height: 140px;
+  margin-top: 2rem;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a1a1a1 25%, #111 80%);
-  box-shadow: 
-    0 0 30px rgba(0, 242, 254, 0.3),
-    inset 0 0 15px rgba(0, 0, 0, 0.8);
+  background: radial-gradient(circle at 30% 30%, #fff 0%, #333 20%, #000 80%);
+  box-shadow: 0 0 40px var(--primary);
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: eyePulse 6s ease-in-out infinite alternate;
-  cursor: pointer;
+  animation: pulse 4s infinite alternate;
 }
 
-/* Íris */
-.eye-simulation::before {
-  content: '';
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #00f2fe 0%, #0052d4 60%, #000 100%);
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
-  position: absolute;
-}
-
-/* Pupila */
 .pupil {
-  width: 35px;
-  height: 35px;
-  background-color: #000;
-  border-radius: 50%;
-  position: relative;
-  z-index: 2;
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
-  animation: pupilDilate 4s ease-in-out infinite alternate;
-}
-
-/* Brilho da Luz no Olho */
-.pupil::after {
-  content: '';
   position: absolute;
-  top: 4px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: #000;
   border-radius: 50%;
-  opacity: 0.8;
+  border: 3px solid var(--primary);
+  animation: dilate 3s infinite alternate;
 }
 
-/* Keyframes da Animação do Olho */
-@keyframes eyePulse {
-  0% { box-shadow: 0 0 25px var(--primary-glow); }
-  50% { box-shadow: 0 0 45px var(--accent-glow); }
-  100% { box-shadow: 0 0 25px var(--primary-glow); }
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px var(--primary); }
+  100% { box-shadow: 0 0 50px var(--accent); }
 }
 
-@keyframes pupilDilate {
-  0% { transform: scale(0.8); }
-  30% { transform: scale(1.4); }
-  60% { transform: scale(0.6); }
-  100% { transform: scale(1.1); }
+@keyframes dilate {
+  0% { width: 30px; height: 30px; }
+  100% { width: 55px; height: 55px; }
 }
 
-/* ==========================================================================
-   5. ESTRUTURA DAS SEÇÕES & TÍTULOS
-   ========================================================================== */
+/* LAYOUT DAS SEÇÕES */
 section {
-  padding: 7rem 10%;
-  position: relative;
+  padding: 6rem 10%;
+  scroll-margin-top: 70px;
 }
 
 .section-title {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 4rem;
-  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
 }
 
 .section-title::after {
   content: '';
   display: block;
-  width: 70px;
+  width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  margin: 0.8rem auto 0;
+  background: var(--accent);
+  margin: 0.5rem auto 0;
   border-radius: 2px;
 }
 
-/* ==========================================================================
-   6. CARDS DA ANATOMIA (GRID MODERNO COM GLASSMORPHISM)
-   ========================================================================== */
+/* CARDS DE ROBÓTICA */
 .grid-anatomy {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 }
 
 .card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: var(--border-glow);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem 2rem;
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--primary), transparent);
-  opacity: 0;
-  transition: var(--transition-fast);
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: transform 0.3s, border-color 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  background: var(--bg-card-hover);
-  border-color: rgba(0, 242, 254, 0.4);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
-
-.card:hover::before {
-  opacity: 1;
+  transform: translateY(-10px);
+  border-color: var(--primary);
 }
 
 .card h3 {
-  font-family: var(--font-heading);
   font-size: 1.4rem;
   color: var(--primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-.card p {
-  color: var(--text-muted);
-  font-size: 0.98rem;
-}
-
-/* ==========================================================================
-   7. LINHA DO TEMPO / PASSO A PASSO DA VISÃO
-   ========================================================================== */
+/* LINHA DO TEMPO DA FÍSICA */
 .process-timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
-  max-width: 850px;
+  gap: 2rem;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .step-item {
   display: flex;
   align-items: flex-start;
-  gap: 1.8rem;
-  background: var(--bg-card);
-  border: var(--border-glow);
-  padding: 2rem;
-  border-radius: var(--radius-md);
-  transition: var(--transition-smooth);
-}
-
-.step-item:hover {
-  transform: translateX(10px);
-  border-color: var(--accent);
-  box-shadow: -5px 5px 25px rgba(255, 0, 127, 0.15);
+  gap: 1.5rem;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
 }
 
 .step-number {
-  background: linear-gradient(135deg, var(--accent), var(--purple-glow));
+  background: var(--accent);
   color: #fff;
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-  width: 48px;
-  height: 48px;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .step-item h4 {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  color: var(--text-main);
-  margin-bottom: 0.4rem;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
 }
 
-.step-item p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-/* ==========================================================================
-   8. COMPARAÇÃO (CONES VS BASTONETES)
-   ========================================================================== */
+/* CARDS DE PROGRAMAÇÃO */
 .comparison-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .comp-box {
-  background: linear-gradient(160deg, rgba(18, 22, 41, 0.8), rgba(8, 10, 20, 0.9));
-  border: var(--border-glow);
-  padding: 3rem 2rem;
-  border-radius: var(--radius-lg);
+  flex: 1 1 280px;
+  background: linear-gradient(145deg, #161b33, #0d1021);
+  padding: 2rem;
+  border-radius: 15px;
   text-align: center;
-  transition: var(--transition-smooth);
-}
-
-.comp-box:hover {
-  border-color: var(--secondary);
-  box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .comp-box h4 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
   color: var(--secondary);
-  margin-bottom: 1.2rem;
 }
 
-.comp-box p {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.comp-box strong {
-  color: var(--primary);
-}
-
-/* ==========================================================================
-   9. RODAPÉ (FOOTER)
-   ========================================================================== */
+/* FOOTER */
 footer {
-  background: #020305;
+  background: #050608;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text-dim);
-  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
-/* ==========================================================================
-   10. RESPONSIVIDADE (MEDIA QUERIES PARA APRESENTAÇÃO / DISPOSITIVOS)
-   ========================================================================== */
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   header {
-    padding: 1rem 5%;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
   }
 
   nav ul {
-    gap: 1.2rem;
-  }
-
-  nav a {
-    font-size: 0.9rem;
-  }
-
-  section {
-    padding: 5rem 6%;
-  }
-
-  .step-item {
-    flex-direction: column;
     gap: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
   }
 }

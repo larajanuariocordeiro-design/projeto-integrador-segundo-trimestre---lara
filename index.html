@@ -3,278 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Ciência da Visão | Como Enxergamos o Mundo</title>
-  <style>
-    /* RESET E VARIÁVEIS GLÓBAIS */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    :root {
-      --bg-dark: #090a0f;
-      --card-bg: #121526;
-      --primary: #00f2fe;
-      --secondary: #4facfe;
-      --accent: #ff007f;
-      --text-light: #f0f4f8;
-      --text-muted: #a0aec0;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* NAV BAR */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(9, 10, 15, 0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 1000;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: linear-gradient(45deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    /* SEÇÃO HERO */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 1rem;
-      background: radial-gradient(circle at center, #1a1f38 0%, var(--bg-dark) 70%);
-      position: relative;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-
-    .btn-hero {
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 50px;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      color: #000;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .btn-hero:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
-    }
-
-    /* SIMULAÇÃO VISUAL DA LUZ (CSS ART) */
-    .eye-simulation {
-      margin-top: 2rem;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff 0%, #333 20%, #000 80%);
-      box-shadow: 0 0 40px var(--primary);
-      position: relative;
-      animation: pulse 4s infinite alternate;
-    }
-
-    .pupil {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      background: #000;
-      border-radius: 50%;
-      border: 3px solid var(--primary);
-      animation: dilate 3s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 20px var(--primary); }
-      100% { box-shadow: 0 0 50px var(--accent); }
-    }
-
-    @keyframes dilate {
-      0% { width: 30px; height: 30px; }
-      100% { width: 55px; height: 55px; }
-    }
-
-    /* LAYOUT DAS SEÇÕES */
-    section {
-      padding: 6rem 10%;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: var(--accent);
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
-    }
-
-    /* CARDS DA ANATOMIA DO OLHO */
-    .grid-anatomy {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      padding: 2rem;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin-bottom: 0.8rem;
-    }
-
-    /* LINHA DO TEMPO: PASSO A PASSO DA VISÃO */
-    .process-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .step-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border-left: 4px solid var(--accent);
-    }
-
-    .step-number {
-      background: var(--accent);
-      color: #fff;
-      font-weight: bold;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    /* SEÇÃO CURIOSIDADES/COMPARATIVO */
-    .comparison-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
-
-    .comp-box {
-      flex: 1 1 300px;
-      background: linear-gradient(145deg, #161b33, #0d1021);
-      padding: 2rem;
-      border-radius: 15px;
-      text-align: center;
-    }
-
-    .comp-box h4 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: var(--secondary);
-    }
-
-    /* FOOTER */
-    footer {
-      background: #050608;
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-    }
-  </style>
+  <title>A Ciência da Visão | Projeto Integrador</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- HEADER / NAVEGAÇÃO -->
   <header>
-    <div class="logo">VISÃO.HUB</div>
+    <div class="logo">VISÃO.HUB | Projeto Integrador</div>
     <nav>
       <ul>
-        <li><a href="#anatomia">Anatomia</a></li>
-        <li><a href="#processo">Como Funciona</a></li>
-        <li><a href="#fatos">Fatos</a></li>
+        <li><a href="#robotica">Robótica</a></li>
+        <li><a href="#programacao">Programação</a></li>
+        <li><a href="#fisica">Física e Tecnociência</a></li>
       </ul>
     </nav>
   </header>
@@ -282,55 +23,72 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <h1>A Incrível Jornada da Luz</h1>
-    <p>Descubra como o olho humano e o cérebro trabalham juntos para transformar a luz nas imagens que você vê todos os segundos.</p>
-    <a href="#processo" class="btn-hero">Entender o Processo</a>
+    <p>Descubra como o olho humano, a física e a tecnologia se unem para transformar a luz nas imagens que vemos todos os dias.</p>
+    <a href="#fisica" class="btn-hero">Entender o Processo</a>
     
     <div class="eye-simulation">
       <div class="pupil"></div>
     </div>
   </section>
 
-  <!-- ANATOMIA DO OLHO -->
-  <section id="anatomia">
-    <h2 class="section-title">Anatomia Essencial</h2>
+  <!-- SEÇÃO 1: ROBÓTICA -->
+  <section id="robotica">
+    <h2 class="section-title">Robótica: Disco de Newton</h2>
     <div class="grid-anatomy">
       <div class="card">
-        <h3>1. Córnea</h3>
-        <p>A "janela" transparente na frente do olho. Ela refrata (dobra) a luz pela primeira vez para focar a imagem.</p>
+        <h3>Experimento com Arduino</h3>
+        <p>Utilização de um microcontrolador Arduino para gerenciar o acionamento e controle de rotação em projetos de automação visual.</p>
       </div>
       <div class="card">
-        <h3>2. Íris e Pupila</h3>
-        <p>A íris (parte colorida) controla o tamanho da pupila (a abertura central), ajustando a quantidade de luz que entra.</p>
+        <h3>Motor DC e Torque</h3>
+        <p>O motor de corrente contínua fornece a rotação necessária para girar o disco em alta velocidade e gerar a síntese de cores.</p>
       </div>
       <div class="card">
-        <h3>3. Cristalino</h3>
-        <p>A lente natural do olho. Ela muda de formato para focar objetos que estão perto ou longe.</p>
-      </div>
-      <div class="card">
-        <h3>4. Retina</h3>
-        <p>A "tela" no fundo do olho, repleta de fotorreceptores (conetes e bastonetes) que captam a luz e a transformam em impulsos elétricos.</p>
+        <h3>Controle PWM</h3>
+        <p>Sinais de modulação por largura de pulso variam a tensão entregue ao motor, ajustando a velocidade de rotação do experimento.</p>
       </div>
     </div>
   </section>
 
-  <!-- PASSO A PASSO DO PROCESSO -->
-  <section id="processo">
-    <h2 class="section-title">O Caminho da Imagem</h2>
+  <!-- SEÇÃO 2: PROGRAMAÇÃO -->
+  <section id="programacao">
+    <h2 class="section-title">Programação Web</h2>
+    <div class="comparison-container">
+      <div class="comp-box">
+        <h4>HTML5 &lt;/&gt;</h4>
+        <p>Responsável pela <strong>estrutura e marcação</strong> dos elementos na tela, organizando textos, seções e mídias do site.</p>
+      </div>
+
+      <div class="comp-box">
+        <h4>CSS3 { }</h4>
+        <p>Gerencia a <strong>estilização visual</strong>, cuidando de cores, layouts responsivos, animações e efeitos modernos.</p>
+      </div>
+
+      <div class="comp-box">
+        <h4>JavaScript (JS)</h4>
+        <p>Adiciona <strong>interatividade e dinâmica</strong> ao sistema, permitindo reações a cliques e manipulação de dados em tempo real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: FÍSICA E TECNOCIÊNCIA -->
+  <section id="fisica">
+    <h2 class="section-title">Física e Tecnociência: O Caminho da Luz</h2>
     <div class="process-timeline">
       
       <div class="step-item">
         <div class="step-number">1</div>
         <div>
-          <h4>Entrada da Luz</h4>
-          <p>A luz reflete nos objetos e entra no olho através da córnea, passando pela pupila.</p>
+          <h4>Entrada da Luz e Refração</h4>
+          <p>A luz entra através da córnea e do cristalino, sofrendo refração para focar os raios luminosos exatamente sobre a retina.</p>
         </div>
       </div>
 
       <div class="step-item">
         <div class="step-number">2</div>
         <div>
-          <h4>Inversão da Imagem</h4>
-          <p>O cristalino projeta a imagem de cabeça para baixo na retina por causa do ângulo de refração do feixe luminoso.</p>
+          <h4>Decomposição e Síntese de Cores</h4>
+          <p>A luz branca é a soma de todas as cores do espectro visível. O disco de Newton demonstra a síntese dessas cores ao girar.</p>
         </div>
       </div>
 
@@ -338,34 +96,16 @@
         <div class="step-number">3</div>
         <div>
           <h4>Conversão Química-Elétrica</h4>
-          <p>Os bastonetes (percebem brilho/sombra) e os cones (percebem cores) transformam a luz em sinais elétricos.</p>
+          <p>Cones (percepção de cor) e bastonetes (brilho e sombra) na retina convertem fótons de luz em impulsos elétricos.</p>
         </div>
       </div>
 
       <div class="step-item">
         <div class="step-number">4</div>
         <div>
-          <h4>Envio e Ajuste pelo Cérebro</h4>
-          <p>O Nervo Óptico envia os sinais ao córtex visual do cérebro, que desvira a imagem e interpreta as formas e cores finais.</p>
+          <h4>Processamento Cerebral</h4>
+          <p>O nervo óptico conduz os sinais até o córtex visual do cérebro, que interpreta as imagens finais que enxergamos.</p>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CURIOSIDADES E FATOS -->
-  <section id="fatos">
-    <h2 class="section-title">Fotorreceptores: Cones vs Bastonetes</h2>
-    <div class="comparison-container">
-      
-      <div class="comp-box">
-        <h4>Cones 🟢🔴🔵</h4>
-        <p>Aproximadamente 6 a 7 milhões no olho. Funcionam melhor em alta iluminação e são responsáveis por enxergar <strong>cores e detalhes precisos</strong>.</p>
-      </div>
-
-      <div class="comp-box">
-        <h4>Bastonetes ⚪⚫</h4>
-        <p>Aproximadamente 120 milhões. São extremamente sensíveis à luz, permitindo-nos enxergar no <strong>escuro e detectar movimento</strong> na visão periférica.</p>
       </div>
 
     </div>
@@ -373,7 +113,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>A Ciência da Visão — Apresentação Interativa de Biologia e Física.</p>
+    <p>Projeto Integrador — IFA | Apresentação de Robótica, Programação e Física.</p>
   </footer>
 
 </body>
